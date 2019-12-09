@@ -132,6 +132,7 @@ class ClassificationModel:
             'n_gpu': 1,
             'use_multiprocessing': True,
             'silent': False,
+            'topk': 1
         }
 
         if not use_cuda:
@@ -595,7 +596,7 @@ class ClassificationModel:
             top_predictions = list()
             print(f"preds before argmax -->> ", preds)
             for pred in preds:
-                topk = pred.argsort()[::-1][:5]
+                topk = pred.argsort()[::-1][:args["topk"]]
                 top_predictions.append(topk)
             preds = np.argmax(preds, axis=1)
             print(f"preds after argmax -->> ", preds)
