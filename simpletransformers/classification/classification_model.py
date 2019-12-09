@@ -592,7 +592,11 @@ class ClassificationModel:
             else:
                 preds = [[self._threshold(pred, args['threshold']) for pred in example] for example in preds]
         else:
+            print(f"preds before argmax -->> ", preds)
             preds = np.argmax(preds, axis=1)
+            # preds = preds.argsort()[::-1][:5]
+            print(f"preds after argmax -->> ", preds)
+            
 
         return preds, model_outputs
 
